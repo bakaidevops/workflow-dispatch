@@ -5,8 +5,12 @@ on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: contains(github.ref, 'feature/**')
     steps:
+      - name: Fail if branch is not feature/**
+        if: github.event_name == 'workflow_dispatch' && contains(github.ref, 'feature/**')
+        run: |
+          echo "This workflow should not be triggered with workflow_dispatch on a branch other than feature/**"
+          exit 1
       - name: Checkout code
         uses: actions/checkout@v3
 
