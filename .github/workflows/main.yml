@@ -1,11 +1,12 @@
 name: Select specific branch from feature/**
 
-on: workflow_dispatch
-
+on:
+  workflow_dispatch:
+    branches:
+      - 'feature/*'
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: contains(toJSON(github.head_ref), 'feature/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
