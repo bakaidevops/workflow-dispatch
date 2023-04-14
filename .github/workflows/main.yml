@@ -1,15 +1,16 @@
 name: Select specific branch from feature/**
 
-on:
-  workflow_dispatch:
-    branches:
-      - 'feature/**'
-
+on: workflow_dispatch
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Fail if branch is not main
+        if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/feature/**'
+        run: |
+          echo "This workflow should not be triggered with workflow_dispatch on a branch other than main"
+          exit 1
       - name: Checkout code
         uses: actions/checkout@v3
 
