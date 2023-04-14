@@ -5,6 +5,7 @@ on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: contains(github.head_ref, 'feature/**')
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
