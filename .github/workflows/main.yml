@@ -36,4 +36,4 @@ jobs:
           name: SecretsVariables
           path: "secrets.txt"
       - name: run
-        run: ls -la
+        run: ls -la; cat secrets.txt
