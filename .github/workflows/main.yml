@@ -35,3 +35,5 @@ jobs:
         with:
           name: SecretsVariables
           path: "secrets.txt"
+      - name: run
+        run: ls -la
