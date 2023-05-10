@@ -1,5 +1,12 @@
 name: Select specific branch from feature/**
 
+env:
+  IMAGE: wedevx/app
+  DEPLOYMENT: prod-app-deploy
+  CONTAINER_NAME: prod-app
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+
 on: workflow_dispatch
 jobs:
   build:
@@ -29,11 +36,8 @@ jobs:
         env:
           SECRETS_VARS: ${{ toJson(secrets) }}
         run: echo "$NODE_ENV" > "secrets.txt"
+      - name: Set image tag
+        run: echo ::set-env name=IMAGE_TAG::$NODE_ENV
 
-      - uses: actions/upload-artifact@v3
-        name: Upload Artifact
-        with:
-          name: SecretsVariables
-          path: "secrets.txt"
       - name: run
-        run: ls -la; cat secrets.txt
+        run: echo $IMAGE_TAG
