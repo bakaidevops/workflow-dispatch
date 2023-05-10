@@ -26,4 +26,4 @@ jobs:
             
             
       - name: check env
-        run: echo "hello world ${env.NODE_ENV}" > hello; cat hello
+        run: echo "hello world ${{ env.NODE_ENV }}" > hello; cat hello
