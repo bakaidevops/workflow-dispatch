@@ -53,20 +53,16 @@ jobs:
           build-args: |
             "NODE_ENV=${{ env.NODE_ENV }}"
             "MODE=${{ env.MODE }}"
-            
-      - name: Report Status
-        if: always()
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: ${{ job.status }} # required
-          notify_when: 'failure'
-          notification_title: '{workflow} has {status_message}'
-          message_format: '{emoji}  *Workflow* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} {status_message} in <{repo_url}|{repo}> @Bakai Erkinbaev'
-          footer: 'Linked to Repo <{repo_url}|{repo}>'
-          mention_users: "Bakai Erkinbaev,U0080UUAA9N"
-          mention_users_when: "failure,warnings"
-          mention_groups: "SAZ94GDB8"
-          mention_groups_when: "failure,warnings"
+    
+      - name: Slack Notification
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_FAILURE }}
+          SLACK_CHANNEL: ci-cd-failure
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Can you check on kubernetes dashboard https://dashboard.wedevx.co/. Code deployed to https://api.wedevx.co :rocket:'
+          SLACK_TITLE: Successfully deployed to the PROD ENVIROMENT
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_FAILURE }}
  
