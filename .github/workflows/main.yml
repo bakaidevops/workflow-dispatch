@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      - name: check failure
-        run: exit 1
 
       - name: Configure AWS credentials
         id: aws-credentials
