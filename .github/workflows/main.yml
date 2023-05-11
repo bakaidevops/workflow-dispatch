@@ -61,7 +61,7 @@ jobs:
           SLACK_CHANNEL: ci-cd-failure
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Can you check on kubernetes dashboard https://dashboard.wedevx.co/. Code deployed to https://api.wedevx.co :rocket: @Bakai Erkinbaev'
+          SLACK_MESSAGE: 'Error: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
           SLACK_TITLE: Successfully deployed to the PROD ENVIROMENT
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_FAILURE }}
