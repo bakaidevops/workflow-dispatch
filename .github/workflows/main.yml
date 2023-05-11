@@ -63,8 +63,10 @@ jobs:
           notification_title: '{workflow} has {status_message}'
           message_format: '{emoji}  *Workflow* ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} {status_message} in <{repo_url}|{repo}>'
           footer: 'Linked to Repo <{repo_url}|{repo}>'
-          mention_users: "Bakai Erkinbaev"
-          mention_groups_when: 'failure,warnings'
+          mention_users: "@Bakai Erkinbaev,U0080UUAA9N"
+          mention_users_when: "failure,warnings"
+          mention_groups: "SAZ94GDB8"
+          mention_groups_when: "failure,warnings"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_FAILURE }}
  
