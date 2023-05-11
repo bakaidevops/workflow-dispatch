@@ -50,4 +50,18 @@ jobs:
           build-args: |
             "NODE_ENV=${{ env.NODE_ENV }}"
             "MODE=${{ env.MODE }}"
+            
+      - name: Report Status
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }} # required
+          notify_when: 'failure'
+          notification_title: '{workflow} has {status_message}'
+          message_format: '{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>'
+          footer: 'Linked to Repo <{repo_url}|{repo}>'
+          mention_groups: 'SAZ94GDB8'
+          mention_groups_when: 'failure,warnings'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_FAILURE }}
  
